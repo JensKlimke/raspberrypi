@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  zigbee2mqtt:
+    image: koenkk/zigbee2mqtt:1.37.1
+    container_name: zigbee2mqtt
+    volumes:
+      - ./zigbee2mqtt/data:/app/data
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0  # Adjust this based on your Zigbee device
+    environment:
+      - TZ=Europe/Berlin
+    restart: unless-stopped
+
+  mosquitto:
+    image: eclipse-mosquitto:2.0.18
+    container_name: mosquitto
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    restart: unless-stopped
