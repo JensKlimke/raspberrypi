@@ -25,7 +25,7 @@ services:
       - mqtt_log:/mosquitto/log
     restart: unless-stopped
 
-node-red:
+  node-red:
     image: nodered/node-red:4.0
     container_name: node-red
     environment:
