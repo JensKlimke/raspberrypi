@@ -35,6 +35,7 @@ services:
     restart: always
     volumes:
       - nodered_data:/data
+    network_mode: host
 
 volumes:
   zigbee2mqtt_data:
