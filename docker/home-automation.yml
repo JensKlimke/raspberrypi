@@ -37,7 +37,20 @@ services:
       - nodered_data:/data
     network_mode: host
 
+  homeassistant:
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    container_name: homeassistant
+    volumes:
+      - hass_data:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+
 volumes:
+  hass_data:
+    external: true
   zigbee2mqtt_data:
     external: true
   mqtt_config:
